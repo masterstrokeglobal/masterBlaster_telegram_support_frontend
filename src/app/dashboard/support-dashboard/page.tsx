@@ -103,7 +103,7 @@ export default function Dashboard() {
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <Card style={{
                 background:
                   "linear-gradient(45deg, rgba(43, 255, 0, 0.6), rgba(0, 255, 26, 0.6))",
@@ -186,7 +186,7 @@ export default function Dashboard() {
                 </div>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <Card className="lg:col-span-2 border-0 shadow-lg hover:shadow-xl transition-shadow">
@@ -194,7 +194,7 @@ export default function Dashboard() {
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
                     <BarChart2 className="h-5 w-5 text-primary" />
-                    <CardTitle className="text-primary">Transaction Statistics</CardTitle>
+                    <CardTitle className="text-primary">Support Statistics</CardTitle>
                   </div>
                   <div className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-medium">
                     {dateFilter === "custom" && dateRange?.from && dateRange?.to
@@ -212,7 +212,7 @@ export default function Dashboard() {
               <CardHeader className="flex flex-row items-center justify-between border-b border-gray-100 pb-4">
                 <div className="flex items-center gap-2">
                   <PieChart className="h-5 w-5 text-primary" />
-                  <CardTitle className="">Transaction Status</CardTitle>
+                  <CardTitle className="">Support Status</CardTitle>
                 </div>
               </CardHeader>
               <CardContent className="pt-6">

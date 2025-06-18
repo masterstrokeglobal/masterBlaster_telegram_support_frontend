@@ -104,18 +104,18 @@ const Sidebar = ({ className }: PropsWithClassName) => {
     {
       name: "Dashboard",
       icon: Home,
-      link: "/dashboard/merchant-dashboard",
+      link: "/dashboard/support-dashboard",
     },
     {
-      name: "Transactions",
+      name: "Support",
       icon: Users,
-      link: "/dashboard/transactions",
+      link: "/dashboard/support",
     },
-    {
-      name: "Merchant Documents",
-      icon: Building,
-      link: "/dashboard/documents",
-    },
+    // {
+    //   name: "Merchant Documents",
+    //   icon: Building,
+    //   link: "/dashboard/documents",
+    // },
   ];
 
   const pathname = usePathname();
@@ -192,46 +192,46 @@ const Sidebar = ({ className }: PropsWithClassName) => {
   if (isMerchant) {
     const merchant = userDetails as Merchant;
 
-    if (!merchant.restrictedApi?.includes(APIS.MERCHANT_QR)) {
-      menuItems.push({
-        name: "Add QR Codes and Bank Accounts",
-        icon: QrCodeIcon,
-        link: "/dashboard/qr-codes",
-      });
-    }
+    // if (!merchant.restrictedApi?.includes(APIS.MERCHANT_QR)) {
+    //   menuItems.push({
+    //     name: "Add QR Codes and Bank Accounts",
+    //     icon: QrCodeIcon,
+    //     link: "/dashboard/qr-codes",
+    //   });
+    // }
 
-    if (!merchant.restrictedApi?.includes(APIS.USER_WITHDRAW)) {
-      menuItems.push({
-        name: "Withdraws",
-        icon: DollarSign,
-        subItems: [
-          { name: "User Payouts", link: "/dashboard/user-payouts" },
-        ],
-      });
-    }
+    // if (!merchant.restrictedApi?.includes(APIS.USER_WITHDRAW)) {
+    //   menuItems.push({
+    //     name: "Withdraws",
+    //     icon: DollarSign,
+    //     subItems: [
+    //       { name: "User Payouts", link: "/dashboard/user-payouts" },
+    //     ],
+    //   });
+    // }
 
-    if (!merchant.restrictedApi?.includes(APIS.MERCHANT_PAYOUT)) {
-      menuItems.push({
-        name: "Payout Settings",
-        icon: Repeat1,
-        subItems: [
-          { name: "Payouts", link: "/dashboard/payouts" },
-          { name: "Payout Options", link: "/dashboard/payout-options" },
-        ],
-      });
-    }
+    // if (!merchant.restrictedApi?.includes(APIS.MERCHANT_PAYOUT)) {
+    //   menuItems.push({
+    //     name: "Payout Settings",
+    //     icon: Repeat1,
+    //     subItems: [
+    //       { name: "Payouts", link: "/dashboard/payouts" },
+    //       { name: "Payout Options", link: "/dashboard/payout-options" },
+    //     ],
+    //   });
+    // }
 
-    if (!merchant.restrictedApi?.includes(APIS.DEVELOPER_API)) {
+    // if (!merchant.restrictedApi?.includes(APIS.DEVELOPER_API)) {
 
-      menuItems.push({
-        name: "API Settings",
-        icon: KeyIcon,
-        subItems: [
-          { name: "Available API's", link: "/dashboard/apis" },
-          { name: "Developer Settings", link: "/dashboard/api-key" },
-        ],
-      });
-    }
+    //   menuItems.push({
+    //     name: "API Settings",
+    //     icon: KeyIcon,
+    //     subItems: [
+    //       { name: "Available API's", link: "/dashboard/apis" },
+    //       { name: "Developer Settings", link: "/dashboard/api-key" },
+    //     ],
+    //   });
+    // }
   }
 
   return (

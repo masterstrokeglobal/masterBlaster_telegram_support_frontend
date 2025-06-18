@@ -11,9 +11,9 @@ export function TransactionChart() {
   // Transform the data to match the expected format for the chart
   const chartData = data?.data?.map((item: { month: any; totalPayIn: any; totalWithdraw: any; totalPayOut: any; }) => ({
     name: item.month,  // "name" for X-axis
-    userDeposit: item.totalPayIn,
-    userWithdrawal: item.totalWithdraw,
-    merchantPayout: item.totalPayOut
+    totalUserSupport: item.totalPayIn,
+    userSupportSolved: item.totalWithdraw,
+    userSupportPending: item.totalPayOut
   })) || [];
   
   if (chartData.length === 0) return <div>No data</div>
@@ -36,7 +36,7 @@ export function TransactionChart() {
           <Tooltip />
           <Area 
             type="monotone" 
-            dataKey="userDeposit" 
+            dataKey="userSupportSolved" 
             stackId="1" 
             stroke="#10b981" 
             fill="#10b981" 
@@ -44,7 +44,7 @@ export function TransactionChart() {
           />
           <Area 
             type="monotone" 
-            dataKey="userWithdrawal" 
+            dataKey="userSupportPending" 
             stackId="1" 
             stroke="#ef4444" 
             fill="#ef4444" 
@@ -52,7 +52,7 @@ export function TransactionChart() {
           />
           <Area 
             type="monotone" 
-            dataKey="merchantPayout" 
+            dataKey="totalUserSupport" 
             stackId="1" 
             stroke="#f59e0b" 
             fill="#f59e0b" 

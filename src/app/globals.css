@@ -38,7 +38,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 @layer base {
   :root {
-    --background: rgba(156, 163, 175, 0.1);
+    --background: rgba(2, 8, 19, 0.3);
     --foreground: 0 0% 3.9%;
     --card: rgba(156, 163, 175, 0.1);
     --card-foreground: 0 0% 3.9%;
@@ -291,14 +291,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .bgGradient {
-  background: #000936;
-  background: linear-gradient(
+  background: #0f59ee;
+  /* background: linear-gradient(
     54deg,
-    rgba(0, 9, 54, 1) 41%,
+    rgb(0, 5, 54) 41%,
     rgba(0, 13, 59, 1) 43%,
     rgba(0, 25, 75, 1) 76%,
     rgba(86, 21, 131, 1) 100%
-  );
+  ); */
 }
 
 @keyframes fly {

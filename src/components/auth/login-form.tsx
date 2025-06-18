@@ -56,7 +56,7 @@ const LoginForm = () => {
                         latitude: deviceInfo.location.latitude?.toString() ?? "",
                     }, {
                         onSuccess: () => {
-                            router.push("/dashboard/merchant-dashboard");
+                            router.push("/dashboard/support-dashboard");
                         }
                     });
 
@@ -83,16 +83,17 @@ const LoginForm = () => {
                 name="password"
             />
             <FormGroupSelect
+                className="bg-background"
                 control={form.control}
                 label="Login As"
                 name="loginAs"
                 options={[
                     { label: "Admin", value: AdminRole.SUPER_ADMIN },
-                    { label: "Merchant", value: AdminRole.Merchant },
+                    { label: "Support", value: AdminRole.Merchant },
                 ]}
             />
             <div className="space-y-2 pt-2">
-                <Button disabled={isPending} className="block w-full bg-[#53cafd] hover:bg-[#21bafc] font-bold"  >
+                <Button disabled={isPending} className="block w-full bg-[#dc3546] font-bold"  >
                     Login
                 </Button>
             </div>

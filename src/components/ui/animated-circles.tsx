@@ -26,9 +26,9 @@ const AnimatedCircles: React.FC = () => {
       </div>
 
       {/* Pulsating Glow in Top-Right, Bottom-Right, Bottom-Left */}
-      <div className="absolute top-0 right-16 w-96 h-96 rounded-full bg-[#001c51] animate-pulse-glow"></div>
+      {/* <div className="absolute top-0 right-16 w-96 h-96 rounded-full bg-[#001c51] animate-pulse-glow"></div>
       <div className="absolute bottom-0 right-8 w-96 h-96 rounded-full bg-[#001c51] animate-pulse-glow"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96  rounded-full bg-[#001c51] animate-pulse-glow"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96  rounded-full bg-[#001c51] animate-pulse-glow"></div> */}
     </div>
   );
 };
