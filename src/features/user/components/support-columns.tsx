@@ -142,31 +142,31 @@ const supportColumns: ColumnDef<SupportQuery>[] = [
   //       <div className="text-[#6B7280]">{row.original.pgId}</div>
   //     ),
   //   },
-  //   {
-  //     header: "Payment Receipt",
-  //     accessorKey: "image",
-  //     cell: ({ row }) => {
-  //       const buffer = row.original.image?.data;
-  //       if (!buffer || !buffer.length) {
-  //         return <span className="text-gray-400">No receipt</span>;
-  //       }
+  {
+    header: "Image Raised",
+    accessorKey: "image",
+    cell: ({ row }) => {
+      const buffer = row.original.image?.data;
+      if (!buffer || !buffer.length) {
+        return <span className="text-gray-400">No Image Sent</span>;
+      }
 
-  //       // Convert the buffer (Uint8Array or array of numbers) to a Blob and Object URL
-  //       const byteArray = new Uint8Array(buffer);
-  //       const blob = new Blob([byteArray], { type: "image/jpeg" }); // Adjust MIME type if needed
-  //       const url = URL.createObjectURL(blob);
+      // Convert the buffer (Uint8Array or array of numbers) to a Blob and Object URL
+      const byteArray = new Uint8Array(buffer);
+      const blob = new Blob([byteArray], { type: "image/jpeg" }); // Adjust MIME type if needed
+      const url = URL.createObjectURL(blob);
 
-  //       return (
-  //         <a
-  //           href={url}
-  //           download={`receipt-${row.original.id || "image"}.jpg`}
-  //           className="text-blue-600 underline"
-  //         >
-  //           Download Receipt
-  //         </a>
-  //       );
-  //     },
-  //   },
+      return (
+        <a
+          href={url}
+          download={`image-${row.original.id || "image"}.jpg`}
+          className="text-blue-600 underline"
+        >
+          Download Image
+        </a>
+      );
+    },
+  },
   {
     header: "Name",
     accessorKey: "name",
@@ -310,7 +310,10 @@ const ActionDropDown = ({ transaction }: { transaction: SupportQuery }) => {
   const { mutate: reject, isPending: confirmPending } = useRejectSupportQuery();
 
   const onSubmit = (updatedData: TransactionFormValues) => {
-    const image = updatedData.image instanceof FileList ? updatedData.image[0] : updatedData.image;
+    const image =
+      updatedData.image instanceof FileList
+        ? updatedData.image[0]
+        : updatedData.image;
 
     const payload = {
       id,
@@ -330,47 +333,47 @@ const ActionDropDown = ({ transaction }: { transaction: SupportQuery }) => {
       {transaction?.status === SupportStatus.PENDING && (
         <div>
           <FormProvider onSubmit={handleSubmit(onSubmit)} methods={form}>
-              {/* Status Dropdown */}
-              <FormGroupSelect
-                name="status"
-                label=""
-                control={control}
-                options={Object.values(TransactionStatus).map((status) => ({
-                  label: status,
-                  value: status,
-                }))}
+            {/* Status Dropdown */}
+            <FormGroupSelect
+              name="status"
+              label=""
+              control={control}
+              options={Object.values(TransactionStatus).map((status) => ({
+                label: status,
+                value: status,
+              }))}
+            />
+
+            {/* Response Message Field */}
+            <div>
+              <label className="text-sm font-medium">Response Message</label>
+              <input
+                type="text"
+                {...register("responseMessage")}
+                className="w-full text-black mt-1 p-2 border rounded"
+                placeholder="Enter response message"
               />
+            </div>
 
-              {/* Response Message Field */}
-              <div>
-                <label className="text-sm font-medium">Response Message</label>
-                <input
-                  type="text"
-                  {...register("responseMessage")}
-                  className="w-full text-black mt-1 p-2 border rounded"
-                  placeholder="Enter response message"
-                />
-              </div>
+            {/* Image Upload */}
+            <div>
+              <label className="text-sm font-medium">Upload Image</label>
+              <input
+                type="file"
+                accept="image/*"
+                {...register("image")}
+                className="mt-1"
+              />
+            </div>
 
-              {/* Image Upload */}
-              <div>
-                <label className="text-sm font-medium">Upload Image</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  {...register("image")}
-                  className="mt-1"
-                />
-              </div>
-
-              <Button
-                variant="outline"
-                className="text-primary mt-2"
-                type="submit"
-                disabled={isPending || confirmPending}
-              >
-                {isPending || confirmPending ? "Updating..." : "Update Status"}
-              </Button>
+            <Button
+              variant="outline"
+              className="text-primary mt-2"
+              type="submit"
+              disabled={isPending || confirmPending}
+            >
+              {isPending || confirmPending ? "Updating..." : "Update Status"}
+            </Button>
           </FormProvider>
         </div>
       )}
