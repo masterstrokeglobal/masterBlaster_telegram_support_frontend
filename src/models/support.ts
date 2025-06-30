@@ -30,6 +30,7 @@
     payerName!: string;
     image?: { type: "Buffer"; data: number[] };
     comment?: string;
+    chat?: string;
   
     constructor(data: Partial<SupportQuery>) {
       Object.assign(this, data);

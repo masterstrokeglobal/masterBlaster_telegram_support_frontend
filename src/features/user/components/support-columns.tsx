@@ -185,7 +185,26 @@ const supportColumns: ColumnDef<SupportQuery>[] = [
     header: "Message",
     accessorKey: "comment",
     cell: ({ row }) => (
-      <div className="text-[#6B7280]">{row.original.comment}</div>
+      <div className="text-[#6B7280]">
+        {(row.original.comment ?? "")
+          .split("\n")
+          .map((line: string, idx: number) => (
+            <div key={idx} dangerouslySetInnerHTML={{ __html: line }} />
+          ))}
+      </div>
+    ),
+  },
+    {
+    header: "Chat History",
+    accessorKey: "chat",
+    cell: ({ row }) => (
+      <div className="text-[#6B7280] min-w-[150px]">
+        {(row.original.chat ?? "")
+          .split("\n")
+          .map((line: string, idx: number) => (
+            <div key={idx} dangerouslySetInnerHTML={{ __html: line }} />
+          ))}
+      </div>
     ),
   },
   // {
