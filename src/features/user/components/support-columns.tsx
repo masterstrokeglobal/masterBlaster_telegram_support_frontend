@@ -99,7 +99,7 @@ const supportColumns: ColumnDef<SupportQuery>[] = [
           <span className="inline-block">
             <svg
               ref={iconRef}
-              className="w-5 h-5 text-[#6B7280] cursor-pointer"
+              className="w-5 h-5 text-primary cursor-pointer"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -139,7 +139,7 @@ const supportColumns: ColumnDef<SupportQuery>[] = [
   //     header: "UTR",
   //     accessorKey: "pgId",
   //     cell: ({ row }) => (
-  //       <div className="text-[#6B7280]">{row.original.pgId}</div>
+  //       <div className="text-primary">{row.original.pgId}</div>
   //     ),
   //   },
   {
@@ -148,7 +148,7 @@ const supportColumns: ColumnDef<SupportQuery>[] = [
     cell: ({ row }) => {
       const buffer = row.original.image?.data;
       if (!buffer || !buffer.length) {
-        return <span className="text-gray-400">No Image Sent</span>;
+        return <span className="text-primary">No Image Sent</span>;
       }
 
       // Convert the buffer (Uint8Array or array of numbers) to a Blob and Object URL
@@ -171,21 +171,21 @@ const supportColumns: ColumnDef<SupportQuery>[] = [
     header: "Name",
     accessorKey: "name",
     cell: ({ row }) => (
-      <div className="text-[#6B7280]">{row.original.payerName}</div>
+      <div className="text-primary">{row.original.payerName}</div>
     ),
   },
   {
     header: "Account Id",
     accessorKey: "accountId",
     cell: ({ row }) => (
-      <div className="text-[#6B7280]">{row.original.accountId}</div>
+      <div className="text-primary">{row.original.accountId}</div>
     ),
   },
   {
     header: "Message",
     accessorKey: "comment",
     cell: ({ row }) => (
-      <div className="text-[#6B7280]">
+      <div className="text-primary">
         {(row.original.comment ?? "")
           .split("\n")
           .map((line: string, idx: number) => (
@@ -194,18 +194,40 @@ const supportColumns: ColumnDef<SupportQuery>[] = [
       </div>
     ),
   },
-    {
+  {
     header: "Chat History",
     accessorKey: "chat",
-    cell: ({ row }) => (
-      <div className="text-[#6B7280] min-w-[150px]">
-        {(row.original.chat ?? "")
-          .split("\n")
-          .map((line: string, idx: number) => (
-            <div key={idx} dangerouslySetInnerHTML={{ __html: line }} />
-          ))}
-      </div>
-    ),
+    cell: ({ row }) => {
+      const messages = (row.original.chat ?? "")
+        .split("\n\n")
+        .filter((line) => line.trim());
+
+      const payerName = row.original.payerName || "Unknown";
+
+      return (
+        <div className="min-w-[200px] flex flex-col gap-2">
+          {messages.map((line: string, idx: number) => {
+            const isAdmin = line.startsWith("admin:");
+            const isPayer = line.startsWith(`${payerName}:`);
+
+            return (
+              <div
+                key={idx}
+                className={`rounded-md whitespace-pre-wrap ${
+                  isAdmin
+                    ? "text-green-600"
+                    : isPayer
+                    ? "text-red-500"
+                    : "text-red-500"
+                }`}
+              >
+                {line}
+              </div>
+            );
+          })}
+        </div>
+      );
+    },
   },
   // {
   //   header: "AMOUNT",
@@ -250,7 +272,7 @@ const supportColumns: ColumnDef<SupportQuery>[] = [
   //   header: "Platform Fee %",
   //   accessorKey: "bonusPercentage",
   //   cell: ({ row }) => (
-  //     <div className="text-[#6B7280]">
+  //     <div className="text-primary">
   //       {row.original.platformFeePercentage}%
   //     </div>
   //   ),
@@ -259,7 +281,7 @@ const supportColumns: ColumnDef<SupportQuery>[] = [
   //     header: "Platform Fee",
   //     accessorKey: "bonusAmount",
   //     cell: ({ row }) => (
-  //       <div className="text-[#6B7280]">
+  //       <div className="text-primary">
   //         Rs.{row.original.platformFeeAmount.toFixed(2)}
   //       </div>
   //     ),
@@ -268,7 +290,7 @@ const supportColumns: ColumnDef<SupportQuery>[] = [
     header: "Created At",
     accessorKey: "createdAt",
     cell: ({ row }) => (
-      <div className="text-[#6B7280]">
+      <div className="text-primary">
         {new Date(new Date(row.original.createdAt).getTime()).toLocaleString(
           "en-IN",
           {
