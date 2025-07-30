@@ -58,9 +58,9 @@ const SupportTable = ({ userId }: Props) => {
       merchantId: merchanntId,
       status: status === "all" ? "" : status,
     },
-    // {
-    //   refetchInterval: 3000,
-    // }
+    {
+      refetchInterval: 3000,
+    }
   );
 
   const prevDataRef = useRef<Transaction[] | null>(null);
