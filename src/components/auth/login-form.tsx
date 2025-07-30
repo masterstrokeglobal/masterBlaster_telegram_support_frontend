@@ -88,8 +88,9 @@ const LoginForm = () => {
                 label="Login As"
                 name="loginAs"
                 options={[
-                    // { label: "Admin", value: AdminRole.SUPER_ADMIN },
+                 
                     { label: "Support", value: AdminRole.Merchant },
+                       { label: "Admin", value: AdminRole.SUPER_ADMIN },
                 ]}
             />
             <div className="space-y-2 pt-2">
